@@ -1,0 +1,54 @@
+version: "3.8"
+
+networks:
+  loki:
+
+volumes:
+  prometheus:
+  grafana:
+
+services:
+
+  # Since the Loki containers are running as user 10001 and the mounted data volume is owned by root,
+  # Loki would not have permissions to create the directories.
+  # Therefore the init container changes permissions of the mounted directory.
+
+  # Test
+  # curl -v -H "Content-Type: application/json" -XPOST -s "http://localhost:3100/loki/api/v1/push" --data-raw '{"streams": [{ "stream": { "foo": "bar2" }, "values": [ [ "1669828238000000000", "fizzbuzz" ] ] }]}'
+  loki:
+    image: grafana/loki
+    ports:
+      - "3100:3100"                                   # loki needs to be exposed so it receives logs
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - loki
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+    volumes:
+      - ./docker/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yml
+      - grafana:/var/lib/grafana
+    networks:
+      - loki
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./docker/prometheus.yaml:/etc/prometheus/prometheus.yml
+      - prometheus:/prometheus
+    command:
+      [
+        '--log.level=debug',
+        '--enable-feature=exemplar-storage',
+        '--config.file=/etc/prometheus/prometheus.yml'
+      ]
+    networks:
+      - loki

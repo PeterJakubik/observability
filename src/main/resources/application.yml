@@ -1,0 +1,19 @@
+server:
+  port: 7654
+  application.name: observabilityserver
+  
+  # All traces should be sent to latency analysis tool
+management:
+  tracing:
+    sampling:
+      probability:1.0
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
