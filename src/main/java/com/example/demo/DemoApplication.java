@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.observation.annotation.Observed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,14 +27,19 @@ class MyController {
 
 	private static final Logger log = LoggerFactory.getLogger(MyController.class);
 	private final MyUserService myUserService;
+	private final MeterRegistry meterRegistry;
 
-	MyController(MyUserService myUserService) {
+	public MyController(MyUserService myUserService, MeterRegistry meterRegistry) {
 		this.myUserService = myUserService;
+		this.meterRegistry = meterRegistry;
 	}
 
 	@GetMapping("/user/{userId}")
 	String userName(@PathVariable("userId") String userId) {
 		log.info("Got a request");
+
+		meterRegistry.counter("users.total", "userid", userId).increment();
+
 		return myUserService.userName(userId);
 	}
 }
