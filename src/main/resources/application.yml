@@ -1,6 +1,7 @@
 server:
   port: 7654
-  application.name: observabilityserver
+
+spring.application.name: observabilityserver
   
   # All traces should be sent to latency analysis tool
 management:
