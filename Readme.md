@@ -1,3 +1,5 @@
+[![Java CI with Gradle](https://github.com/PeterJakubik/observability/actions/workflows/gradle.yml/badge.svg)](https://github.com/PeterJakubik/observability/actions/workflows/gradle.yml)
+
 # Springboot 3 and grafana observability
 Aim is to check the Springboot 3 observability with grafana & loki.
 Later activate the OpenTelemetry with grafana tempo and correlate the logs with telemetry 
