@@ -7,4 +7,4 @@ curl -v -H "Content-Type: application/json" -XPOST -s "http://localhost:3100/lok
 
 ## Grafana
 Query
-{app="appName_IS_UNDEFINED"}
+{app="observabilityserver"}
