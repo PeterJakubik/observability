@@ -32,4 +32,4 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         gradle-version: release-candidate
-        arguments: check
+        arguments: build -x test
