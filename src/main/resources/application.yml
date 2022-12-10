@@ -7,7 +7,7 @@ spring.application.name: observabilityserver
 management:
   tracing:
     sampling:
-      probability:1.0
+      probability: 1.0
   metrics:
     distribution:
       percentiles-histogram:
@@ -17,4 +17,9 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,prometheus
+        include: prometheus,health,info,metric
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
