@@ -23,3 +23,7 @@ management:
       show-details: always
     prometheus:
       enabled: true
+  otlp:
+    metrics:
+      export:
+        url: https://localhost:4318/v1/metrics
