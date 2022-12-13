@@ -27,3 +27,5 @@ management:
     metrics:
       export:
         url: https://localhost:4318/v1/metrics
+
+logging.pattern.level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
