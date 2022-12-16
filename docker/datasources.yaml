@@ -9,7 +9,7 @@ datasources:
     jsonData:
       httpMethod: POST
       exemplarTraceIdDestinations:
-        - name: trace_id
+        - name: traceID
           datasourceUid: tempo
   - name: Tempo
     type: tempo
