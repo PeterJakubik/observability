@@ -17,18 +17,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.http.HttpHeaders;
 import java.util.Random;
 import java.util.stream.StreamSupport;
 
 @SpringBootApplication
-public class DemoApplication {
+public class ServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(ServerApplication.class, args);
 	}
 
 	@Bean
