@@ -9,19 +9,16 @@
         </http>
         <format>
             <label>
-                <!--
-                <pattern>app=${appName},host=${HOSTNAME},traceID=%X{traceId:-NONE},level=%level,c=%logger,t=%thread,%msg %ex</pattern>
-                -->
                 <pattern>app=${appName},host=${HOSTNAME},traceID=%X{traceId:-NONE},level=%level</pattern>
             </label>
             <message>
-                <pattern>l=%level h=${HOSTNAME} c=%logger{20} t=%thread | %msg %ex</pattern>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
             </message>
             <sortByTime>true</sortByTime>
         </format>
     </appender>
 
-    <root level="DEBUG">
-        <appender-ref ref="LOKI" />
+    <root level="INFO">
+        <appender-ref ref="LOKI"/>
     </root>
 </configuration>
