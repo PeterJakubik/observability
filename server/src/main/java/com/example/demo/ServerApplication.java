@@ -51,7 +51,7 @@ class MyController {
 	public String userName(HttpServletRequest request, @PathVariable("userId") String userId) {
 		log.info("Got a request");
 
-		meterRegistry.counter("users.total", "userid", userId).increment();
+		meterRegistry.counter("users.total").increment();
 
 		return myUserService.userName(userId);
 	}
